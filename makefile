@@ -9,6 +9,7 @@ OPT = -std=c++14 -O3
 #OPT = -O3 -g
 
 # name
+NAME := ZE5
 NN := main
 INCLUDE := dep.h
 BIN_FOLDER := bin
@@ -23,7 +24,9 @@ MAIN := $(NN).cu
 
 ################################################
 
-all : $(BIN_FOLDER)/$(NN)
+all : $(NAME).exe
+
+$(NAME).exe : $(BIN_FOLDER)/$(NN)
 
 
 debug : OPT += -DDEBUG -g
