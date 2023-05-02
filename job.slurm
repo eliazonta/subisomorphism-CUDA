@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #SBATCH --partition=edu5
 #SBATCH --tasks=1
 #SBATCH --cpus-per-task=1
