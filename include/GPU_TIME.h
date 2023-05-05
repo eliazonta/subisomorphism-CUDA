@@ -18,17 +18,17 @@ struct GpuTime
         cudaEventDestroy(stop);
     }
 
-    void Start()
+    void start()
     {
         cudaEventRecord(start, 0);
     }
 
-    void Stop()
+    void stop()
     {
         cudaEventRecord(stop, 0);
     }
 
-    float Elapsed()
+    float elapsed()
     {
         float elapsed;
         cudaEventSynchronize(stop);
