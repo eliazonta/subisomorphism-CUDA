@@ -48,3 +48,10 @@ clean:
 
 clean_batch_outputs:
 	rm -r $(BATCH_OUT_FOLDER)
+
+download_datasets: check_python
+	python3 scripts/download_datasets.py
+
+check_python:
+# checks if python exists
+	@python3 --version > /dev/null 2>&1 || { echo >&2 "Python3 is required but it's not installed.  Aborting."; exit 1; }
