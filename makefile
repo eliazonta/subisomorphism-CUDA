@@ -22,7 +22,7 @@ SRC_FOLDER := src
 OBJ_FOLDER := obj
 BATCH_OUT_FOLDER := out
 INCLUDE_FOLDER := include
-
+DATA_FOLDER := data
 
 OBJS := $(OBJ_FOLDER)/$(NN)
 MAIN := $(NN).cu
@@ -55,3 +55,6 @@ download_datasets: check_python
 check_python:
 # checks if python exists
 	@python3 --version > /dev/null 2>&1 || { echo >&2 "Python3 is required but it's not installed.  Aborting."; exit 1; }
+
+clear_datasets: 
+	rm $(DATA_FOLDER)/*
