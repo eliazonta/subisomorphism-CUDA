@@ -1,5 +1,6 @@
 #ifndef DEP_H
 #define DEP_H
+
 #define dtype int
 
 #include <stdlib.h>

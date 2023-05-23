@@ -1,6 +1,6 @@
-# Subgraph Matching implementation in CUDA
+# A Parallel Algorithm for Subgraph Isomorphism
 
-## Download the datsets:
+## Download the datasets:
 
 ```bash
 make download_datasets

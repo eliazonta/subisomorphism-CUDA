@@ -29,16 +29,15 @@ MAIN := $(NN).cu
 
 ################################################
 
-all : $(NAME).exe
+all : $(NAME)
 
-$(NAME).exe : $(BIN_FOLDER)/$(NN)
-
+$(NAME) : $(BIN_FOLDER)/$(NN)
 
 debug : OPT += -DDEBUG -g
 debug : NVCC_FLAG += -G
 debug : all
 
-$(BIN_FOLDER)/$(NN) : $(SRC_FOLDER)/${MAIN}
+$(BIN_FOLDER)/$(NN) : $(SRC_FOLDER)/$(MAIN)
 	@mkdir -p $(@D)	
 	@mkdir -p $(BATCH_OUT_FOLDER)
 	$(NVCC) $^ -o $@ $(GPU_ARCH) $(NVCC_FLAG) $(LIBS) $(OPT)

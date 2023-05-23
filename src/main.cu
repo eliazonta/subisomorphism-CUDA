@@ -1,20 +1,21 @@
 #include "../include/dep.h"
 
-__global__ void kernel(void){
-    printf("Hello from the kernel! \n");
-}
-
 __global__ void gpu_print(void){
     printf("Hello from thread [%d, %d]\n", threadIdx.x, blockIdx.x);
 }
 
-int main(void){
-    dtype a = 10;
-    printf("Hello [from host], a w/ dtype  = %d\n", a);
+int main(int argc, char** argv)
+{
+    GpuTime time();
+    // parse data from the data file -> create a parser
+    // alg
+    // external check
+    // benckmarking (how)
 
-    kernel<<<1, 1>>>();
-    cudaDeviceSynchronize();
+//    printf("Hello [from host], a w/ dtype  = %d\n", a);
+
 
     gpu_print<<<2, 1>>>();
     cudaDeviceSynchronize();
+    return 0;
 }

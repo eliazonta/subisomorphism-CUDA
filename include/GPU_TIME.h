@@ -6,13 +6,13 @@ struct GpuTime
     cudaEvent_t start;
     cudaEvent_t stop;
 
-    GpuTimer()
+    GpuTime()
     {
         cudaEventCreate(&start);
         cudaEventCreate(&stop);
     }
 
-    ~GpuTimer()
+    ~GpuTime()
     {
         cudaEventDestroy(start);
         cudaEventDestroy(stop);
