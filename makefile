@@ -4,7 +4,7 @@
 # ============================================================================
 
 CUDA_HOME=/usr/local/cuda-12.1
-NVCC = ${CUDA_HOME}/bin/nvcc
+NVCC = $(CUDA_HOME)/bin/nvcc
 CC = c++
 NVCC_FLAG = -std=c++14
 GPU_ARCH = -arch=sm_70 -m64
