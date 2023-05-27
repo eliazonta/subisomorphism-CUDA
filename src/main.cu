@@ -17,9 +17,10 @@ int main(int argc, char** argv)
 {
     GpuTime time();
     // parse data from the data file -> create a parser
-    // alg
-    // external check
-    // benckmarking (how)
+    // CSR ? COO ? what's better ? 
+    // alg {pain}
+    // external check {py / networkx}
+    // benckmarking [gpu timer content is sufficient ?]
 
     int N = 5;
     size_t size = sizeof(float) * N;
