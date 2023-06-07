@@ -1,4 +1,4 @@
-# A Parallel Algorithm for Subgraph Isomorphism
+# [WIP] A Parallel Algorithm for Subgraph Isomorphism
 
 ## Download the datasets:
 
