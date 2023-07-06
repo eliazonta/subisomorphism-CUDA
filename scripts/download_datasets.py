@@ -6,23 +6,24 @@ import gzip
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DATA_DIR = BASE_DIR / "data/"
-TEMP_DIR = BASE_DIR / ".temp/"
+DATA_DIR = BASE_DIR / "data/" # directory where the datasets will be stored
+TEMP_DIR = BASE_DIR / ".temp/" # directory where the datasets will be downloaded
 
+# datasets to download
 DATASETS_URLS = {
-    "enron": { 
+    "enron": {
         "url": "https://snap.stanford.edu/data/email-Enron.txt.gz",
         "filename": "enron.txt.gz",
     },
-    "gowalla": { 
+    "gowalla": {
         "url": "https://snap.stanford.edu/data/loc-gowalla_edges.txt.gz",
         "filename": "gowalla.txt.gz",
     },
-    "patent": { 
+    "patent": {
         "url": "https://snap.stanford.edu/data/cit-Patents.txt.gz",
         "filename": "patent.txt.gz",
     },
-    "road_california": { 
+    "road_california": {
         "url": "https://snap.stanford.edu/data/roadNet-CA.txt.gz",
         "filename": "road_california.txt.gz",
     },
