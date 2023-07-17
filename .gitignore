@@ -1,6 +1,5 @@
-# download and data directories
 data
 .temp
 bin
 .vscode
-static-examples
+test

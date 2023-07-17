@@ -1,16 +1,11 @@
-# =============================================================================
-# Filename: makefile
-# Author: Zonta Elia 
-# ============================================================================
-
 CUDA_HOME=/usr/local/cuda-12.1
 NVCC = $(CUDA_HOME)/bin/nvcc
-CC = c++
-NVCC_FLAG = -std=c++14
-GPU_ARCH = -arch=sm_70 -m64
+CC = gcc
+# NVCC_FLAG = -std=c++14
+# GPU_ARCH = -arch=sm_70 -m64
 # GPU_ARCH := -arch=sm_52 # try
-LIBS = -L${CUDA_HOME}/lib64
-OPT = -std=c++14 -O3
+# LIBS = -L${CUDA_HOME}/lib64
+# OPT = -std=c++14 -O3
 #OPT = -O3 -g
 
 # name

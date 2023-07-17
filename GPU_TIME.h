@@ -28,9 +28,9 @@ struct GpuTime
         cudaEventRecord(stop, 0);
     }
 
-    float elapsed()
+    double elapsed()
     {
-        float elapsed;
+        double elapsed;
         cudaEventSynchronize(stop);
         cudaEventElapsedTime(&elapsed, start, stop);
         return elapsed;
