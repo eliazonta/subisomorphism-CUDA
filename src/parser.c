@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../include/parser.h"
+
 void read_matrix(int **row_ptr, int **col_ind, float **values, const char *filename, int *num_rows, int *num_cols, int *num_vals) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -28,7 +30,6 @@ void read_matrix(int **row_ptr, int **col_ind, float **values, const char *filen
         // Subtract 1 from row and column indices to match C format
         row--;
         column--;
-        
         row_occurances[row]++;
     }
     

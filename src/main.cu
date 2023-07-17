@@ -5,7 +5,9 @@
 #include <math.h>
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
-#include "GPU_TIME.h"
+
+#include "../include/GPU_TIME.h"
+#include "../include/parser.h"
 
 /*
     IDEA:
