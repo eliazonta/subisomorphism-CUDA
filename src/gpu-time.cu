@@ -1,5 +1,4 @@
-#ifndef __GPU_TIME_H__
-#define __GPU_TIME_H__
+#include "../include/gpu-time.h"
 
 struct GpuTime
 {
@@ -36,5 +35,3 @@ struct GpuTime
         return elapsed;
     }
 };
-
-#endif
