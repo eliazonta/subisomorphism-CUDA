@@ -1,6 +1,7 @@
 #ifndef __iso_h__
 #define __iso_h__
 #include <stdbool.h>
+#include <string.h>
 #include "../include/parser.h"
 
 // Function to check if two graphs are isomorphic
@@ -49,9 +50,8 @@ bool are_iso(struct COOGraph g1, struct COOGraph g2) {
     int n = g1.nnz;
     // int* map = (int*) malloc(n * sizeof(int));
     int map[n];
-    for (int i = 0; i < n; ++i){
-        map[i] = -1;
-    } 
+    // arr init
+    memset(map, -1, n * sizeof(map[0])); 
     // Start with the first vertex
     return iso(g1, g2, map, 0, n);
 }
