@@ -9,6 +9,7 @@ struct CSRGraph {
     int* col_idx;
 };
 
+
 // Function to convert an edge list to CSR format
 void edgeListToCSR(FILE* file, struct CSRGraph* graph) {
     int num_rows, num_cols, nnz;
@@ -97,56 +98,64 @@ int main() {
 }
 
 
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-    FILE *file;
-    int num_edges, source, target;
-    float weight; // Assuming the weight is a float; change to int if necessary
+void readCOO(FILE *file) {
+    int num_rows, num_cols, nnz, source, target;
+    double weight; // Assuming the weight is a float; change to int if necessary
 
-    file = fopen("edge_list.txt", "r"); // Replace with your file name
+    file = fopen("../toy/g1.mtx", "r"); 
 
     if (file == NULL) {
         perror("Error opening file");
         return 1;
     }
-
-    // Count the number of edges in the file
-    num_edges = 0;
-    while (fscanf(file, "%d %d %f", &source, &target, &weight) == 3) {
-        num_edges++;
+    // Matrix Market header skip
+    while(fgetc(file) == '%'){
+        char c;
+        while(c = fgetc(file) != '\n' && c != EOF);
     }
 
+    // Count the number of edges in the file
+    fscanf(file, "%d %d %d", &num_rows, &num_cols, &nnz);
+
     // Allocate memory for COO arrays
-    int *rowidx = (int *)malloc(num_edges * sizeof(int));
-    int *colidx = (int *)malloc(num_edges * sizeof(int));
-    float *vals = (float *)malloc(num_edges * sizeof(float));
+    int *rowidx = (int *)malloc(num_rows * sizeof(int));
+    int *colidx = (int *)malloc(num_cols * sizeof(int));
+    double *vals = (double *)malloc(nnz * sizeof(double));
 
     if (rowidx == NULL || colidx == NULL || vals == NULL) {
         perror("Memory allocation error");
         return 1;
     }
 
-    // Reset file pointer to the beginning
-    fseek(file, 0, SEEK_SET);
-
-    int edge_count = 0;
-    while (fscanf(file, "%d %d %f", &source, &target, &weight) == 3) {
+    for(size_t i = 0; i < nnz; ++i){
+        fscanf(file, "%d %d %lf", &source, &target, &weight)
         // Store edge information in COO arrays
         rowidx[edge_count] = source;
         colidx[edge_count] = target;
         vals[edge_count] = weight; // Change to 1.0 if no weights are provided
-        edge_count++;
     }
 
     fclose(file);
 
     // Print the COO arrays (for demonstration)
     printf("COO Arrays:\n");
-    for (int i = 0; i < num_edges; i++) {
-        printf("(%d, %d, %.2f)\n", rowidx[i], colidx[i], vals[i]);
+    printf("row idx:\n");
+    for (int i = 0; i < num_rows; i++) {
+        printf("%d ", rowidx[i]);
     }
+    printf("\ncol idx:\n");
+    for (int i = 0; i < num_rows; i++) {
+        printf("%d ", colidx[i]);
+    }
+    printf("\nvals:\n");
+    for (int i = 0; i < num_rows; i++) {
+        printf("%.2lf ", vals[i]);
+    }
+    printf("\n\n");
 
     // Free allocated memory
     free(rowidx);
