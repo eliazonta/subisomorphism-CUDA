@@ -1,0 +1,6 @@
+[submodule "externals/fmt"]
+	path = externals/fmt
+	url = https://github.com/fmtlib/fmt.git
+[submodule "externals/matrix_reader"]
+	path = externals/matrix_reader
+	url = https://github.com/senior-zero/matrix_reader.git

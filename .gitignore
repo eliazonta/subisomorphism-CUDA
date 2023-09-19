@@ -1,5 +1,8 @@
 data
 .temp
-bin
 .vscode
-test
+.DS_Store
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+isomorphism
