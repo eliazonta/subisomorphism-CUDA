@@ -1,5 +1,9 @@
+#include "../include/iso.h"
+
 __device__
-void isomorphism()
+void isomorphism(struct COOGraph g1, struct COOGraph g2){
+
+}
 
 __global__ 
 void subgraphIsomorphismKernel(int* targetGraph, int* patternGraph, int* mapping, bool* found, int patternVertices, int targetVertices) 
