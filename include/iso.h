@@ -25,7 +25,7 @@ bool iso(struct COOGraph g1, struct COOGraph g2, int* map, int v, int n)
                         break;
                     }
                 }
-                if (n2 != -1 || g2.vals[n2] != g1.vals[j]) {
+                if (n2 != -1 || g2.weights[n2] != g1.weights[j]) {
                     // Map v1 to v2 and proceed with the next vertex
                    isomprphism = false;
                    break;
