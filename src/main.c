@@ -9,8 +9,8 @@ int main() {
     // struct COOGraph g;
     char file[] = "../toy/g2.mtx";
     struct COOGraph g1, g2;
-    readCOO(file, &g1);
-    readCOO(file, &g2);
+    readCOO_struct(file, &g1);
+    readCOO_struct(file, &g2);
     
     if(are_iso(g1, g2)){
         printf("iso\n");
