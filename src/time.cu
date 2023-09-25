@@ -1,9 +1,9 @@
-#include "../include/gpu-time.h"
+#include "../include/time.cuh"
+// #include <cuda_runtime.h>
 
 struct GpuTime
 {
-    cudaEvent_t start;
-    cudaEvent_t stop;
+    cudaEvent_t start, stop;
 
     GpuTime()
     {

@@ -3,8 +3,7 @@
 
 struct GpuTime
 {
-    cudaEvent_t start;
-    cudaEvent_t stop;
+    cudaEvent_t start, stop;
 
     GpuTime();
     ~GpuTime();

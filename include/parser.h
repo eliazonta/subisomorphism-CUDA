@@ -6,6 +6,8 @@
 
 // #define DEBUG
 
+// for an edge list :
+// num of nnz 
 struct COOGraph {
     int num_rows;
     int num_cols;
