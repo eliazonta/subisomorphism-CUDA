@@ -7,9 +7,14 @@
 #include "../include/utils.cuh"
 #include "../include/parser.h"
 
-#define USE_STRUCT
+// #define USE_STRUCT
+
+// idea
+// kernel for subgraph isomorphism (backtracking)
+// device func called by the kernel for isomorphism on a restriction of the graph 
+
 __device__
-void isomorphism(struct COOGraph g1, struct COOGraph g2){
+void isomorphism(int* g1_num_rows, int* g1_num_cols, int* g1_nnz, int* g1_rowidx, int* g1_colidx, int* g1_weights){
 
 }
 
