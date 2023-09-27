@@ -3,13 +3,13 @@
 
 struct GpuTime
 {
-    cudaEvent_t start, stop;
+    cudaEvent_t sstart, sstop;
 
     GpuTime();
     ~GpuTime();
 
-    void start();
-    void stop();
+    void start(int stream = 0);
+    void stop(int stream = 0);
     double elapsed();
 };
 

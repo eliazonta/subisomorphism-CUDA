@@ -3,35 +3,35 @@
 
 struct GpuTime
 {
-    cudaEvent_t start, stop;
+    cudaEvent_t sstart, sstop;
 
     GpuTime()
     {
-        cudaEventCreate(&start);
-        cudaEventCreate(&stop);
+        cudaEventCreate(&sstart);
+        cudaEventCreate(&sstop);
     }
 
     ~GpuTime()
     {
-        cudaEventDestroy(start);
-        cudaEventDestroy(stop);
+        cudaEventDestroy(sstart);
+        cudaEventDestroy(sstop);
     }
 
-    void start()
+    void start(int stream = 0)
     {
-        cudaEventRecord(start, 0);
+        cudaEventRecord(sstart, stream);
     }
 
-    void stop()
+    void stop(int stream = 0)
     {
-        cudaEventRecord(stop, 0);
+        cudaEventRecord(sstop, stream);
     }
 
     double elapsed()
     {
         double elapsed;
-        cudaEventSynchronize(stop);
-        cudaEventElapsedTime(&elapsed, start, stop);
+        cudaEventSynchronize(sstop);
+        cudaEventElapsedTime(&elapsed, sstart, sstop);
         return elapsed;
     }
 };

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <cublas_v2.h> // -lcublas
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 // #include "../include/iso.h"
@@ -8,8 +9,10 @@
 #include "../include/parser.h"
 #include "../include/time.cuh"
 
-// #define USE_STRUCT
-#define THRUST
+// thrust would be interesting asf but getting some allocation problems
+// 
+#define USE_STRUCT
+// #define THRUST
 
 // idea
 // kernel for subgraph isomorphism (backtracking)
@@ -17,7 +20,8 @@
 
 
 #define BLK_SIZE 256
-#define dtype float 
+#define dtype int 
+#define DBG_CHECK { printf("DBG_CHECK: file %s at line %d\n", __FILE__, __LINE__ ); }
 #define DEBUG
 
 __device__
@@ -32,17 +36,17 @@ void subgraphIsomorphismKernel(int* targetGraph, int* patternGraph, int* mapping
     unsigned int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
     if (tid >= patternVertices) {
-        return;  // Not enough threads for all pattern vertices
+        return;  // not enough threads for all pattern vertices
     }
 
     if (*found) {
-        return;  // Solution already found by another thread
+        return;  // solution already found by another thread
     }
 
-    // Implement the backtracking logic for this thread
-    // Explore different branches of the search space and update the mapping
+    // implement the backtracking logic for this thread!!
+    // explore different branches of the search space and update the mapping
 
-    // If a valid solution is found, set *found = true
+    // if a valid solution is found, set *found = true
 }
 
 int main(int argc, char** argv) {
@@ -67,7 +71,7 @@ int main(int argc, char** argv) {
 
         // better g1 but wip
         #ifdef THRUST
-        thrust::host_vector<int> g1_nnz, g1_num_edges, g1_rowidx, g1_colidx;
+        thrust::host_vector<int> g1_nnz, g1_num_rows,g1_num_cols, g1_rowidx, g1_colidx;
         thrust::host_vector<double> g1_weights;
         
         #endif
@@ -92,7 +96,7 @@ int main(int argc, char** argv) {
         readCOO(file, &g2_num_rows, &g2_num_cols, &g2_nnz, &g2_rowidx, &g2_colidx, &g2_weights);
     #endif
 
-    // Initialize and allocate GPU memory for targetGraph, patternGraph, mapping, and other necessary data
+    
     #ifdef USE_STRUCT
     // copy of stack data for g1
     d_g1.nnz = g1.nnz;
