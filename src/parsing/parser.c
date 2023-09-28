@@ -1,5 +1,5 @@
 #include "parser.h"
-
+#include "../graph/graph.h"
 #define DEBUG
 
 // From edgelist to COO
@@ -11,7 +11,7 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
     dtype weight; 
     FILE* file = fopen(filepath, "r");     
     if (file == NULL) {
-        perror("Error opening file");
+        fprintf(stderr, "Error opening file");
         // return 1;
     }
     // Matrix Market header skip
@@ -24,6 +24,7 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
     // Count the number of edges in the file
     fscanf(file, "%d %d %d", &row, &col, &val);
     printf("nr, nc, nnz : %d %d %d\n", row, col, val);
+    num_edges = val;
 
     // Allocate memory for COO arrays
     rowidx = (int *)malloc(val * sizeof(int));
@@ -31,7 +32,7 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
     weights = (dtype *)malloc(val * sizeof(dtype));
 
     if (rowidx == NULL || colidx == NULL || weights == NULL) {
-        perror("Memory allocation error");
+        fprintf(stderr, "Memory allocation error");
         // return 1;
     }
 
@@ -42,25 +43,27 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
         colidx[i] = target;
         weights[i] = weight; //  1.0 if no weights 
     }
+    int num_vertex = getVertexNum(&weights, val);
 
     fclose(file);
 
     // DEBUG
     #ifdef DEBUG
-    printf("COO Arrays:\n");
-    printf("row idx:\n");
+    fprintf(stdout, "COO Arrays:\n");
+    fprintf(stdout, "NUM vertex [%d] \t NUM edges [%d]\n", num_vertex, num_edges);
+    fprintf(stdout, "\nrow idx:\n");
     for (size_t i = 0; i < val; ++i) {
-        printf("%d\t", rowidx[i]);
+        fprintf(stdout, "%d\t", rowidx[i]);
     }
-    printf("\ncol idx:\n");
+    fprintf(stdout, "\n\ncol idx:\n");
     for (size_t i = 0; i < val; ++i) {
         printf("%d\t", colidx[i]);
     }
-    printf("\nweights:\n");
+    fprintf(stdout, "\n\nweights:\n");
     for (size_t i = 0; i < val; ++i) {
-        printf("%.2lf\t", weights[i]);
+        fprintf(stdout, "%.2lf\t", weights[i]);
     }
-    printf("\n\n");
+    fprintf(stdout, "\n\n");
     #endif
 }
 
@@ -101,28 +104,29 @@ void readCOO_struct(const char* filepath, struct COOGraph* g)
         g->colidx[i] = target;
         g->weights[i] = weight; // Change to 1.0 if no weights are provided
     }
-
+    g->num_vertices = getVertexNum(&g->weights, g->num_edges);
     fclose(file);
 
     // DEBUG
     #ifdef DEBUG
-    printf("COO Arrays:\n");
-    printf("row idx:\n");
+    fprintf(stdout, "COO Arrays:\n");
+    fprintf(stdout, "NUM vertex [%d] \t NUM edges [%d]\n", g->num_vertices, g->num_edges);
+    fprintf(stdout, "\nrow idx:\n");
     for (size_t i = 0; i < g->num_edges; ++i) 
     {
-        printf("%d\t", g->rowidx[i]);
+        fprintf(stdout, "%d\t", g->rowidx[i]);
     }
-    printf("\ncol idx:\n");
+    printf("\n\ncol idx:\n");
     for (size_t i = 0; i < g->num_edges; ++i) 
     {
-        printf("%d\t", g->colidx[i]);
+        fprintf(stdout, "%d\t", g->colidx[i]);
     }
-    printf("\nweights:\n");
+    printf("\n\nweights:\n");
     for (size_t i = 0; i < g->num_edges; ++i) 
     {
-        printf("%.2lf\t", g->weights[i]);
+        fprintf(stdout, "%.2lf\t", g->weights[i]);
     }
-    printf("\n\n");
+    fprintf(stdout, "\n\n");
     #endif
 }
 

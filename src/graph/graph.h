@@ -1,3 +1,4 @@
+#pragma once 
 #ifndef __graph__
 #define __graph__
 
@@ -26,5 +27,6 @@ struct CSRGraph {
     dtype* weights;
 };
 
+int getVertexNum(int* arr, int s);
 
-#endif
+#endif // eof

@@ -1,9 +1,14 @@
+#pragma once
 #ifndef __utils__
 #define __utils__
 #include <chrono>
 #include <cmath>
 #include <mutex>
 #include <iostream>
+
+static int BLOCK_SIZE = 1024;
+static int dsize = 1;
+static int GRID_SIZE = (dsize+BLOCK_SIZE-1)/BLOCK_SIZE;
 
 ///////////////////////////////////////////////////////////////
 // CUDA error check

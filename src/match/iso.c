@@ -1,5 +1,5 @@
 #include "iso.h"
-
+// sequential iso 
 // Function to check if two graphs are isomorphic
 bool iso(struct COOGraph g1, struct COOGraph g2, int* map, int v, int n) 
 {
