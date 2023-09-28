@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+// too messy, more work needed :/
+
+
 // Header for row col val format 
 void read_matrix(int **row_ptr, int **col_ind, float **values, const char *filename, int *num_rows, int *num_cols, int *num_vals)
 

@@ -1,10 +1,4 @@
-#ifndef __utils__
-#define __utils__
-#pragma once 
-#include <chrono>
-#include <cmath>
-#include <mutex>
-#include <iostream>
+#include "utils.cuh"
 
 ///////////////////////////////////////////////////////////////
 // CUDA error check

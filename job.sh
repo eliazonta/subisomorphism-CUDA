@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 
-#SBATCH --job-name=GPU-isomorphism
+#SBATCH --job-name=GPU-subisomorphism
 #SBATCH --output=out/iso-%x.%j.out
 #SBATCH --error=out/iso-%x.%j.err
 
