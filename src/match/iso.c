@@ -1,17 +1,12 @@
-#ifndef __iso_h__
-#define __iso_h__
-#include <stdbool.h>
-#include <string.h>
-#include "../include/parser.h"
+#include "iso.h"
 
 // Function to check if two graphs are isomorphic
 bool iso(struct COOGraph g1, struct COOGraph g2, int* map, int v, int n) 
 {
-    // If all vertices are mapped, return true
+    // all vertices are mapped, return true
     if (v == n) return true;
 
-    // Try all vertices one by one
-    for (int i = 0; i < n; ++i) 
+    for (size_t i = 0; i < n; ++i) 
     {
         // If v2 is not yet mapped and the graphs are isomorphic with v1 and v2 mapped
         if (map[i] == -1)
@@ -55,8 +50,8 @@ bool iso(struct COOGraph g1, struct COOGraph g2, int* map, int v, int n)
 // Function to check if two graphs are isomorphic
 bool are_iso(struct COOGraph g1, struct COOGraph g2) 
 {
-    if(g1.nnz != g2.nnz || g1.num_rows != g2.num_rows)return false;
-    int n = g1.nnz;
+    if(g1.num_edges != g2.num_edges)return false;
+    int n = g1.num_edges;
     // int* map = (int*) malloc(n * sizeof(int));
     int map[n];
     // arr init with -1s
@@ -64,4 +59,3 @@ bool are_iso(struct COOGraph g1, struct COOGraph g2)
     // Start with the first vertex
     return iso(g1, g2, map, 0, n);
 }
-#endif

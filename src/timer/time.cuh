@@ -1,5 +1,5 @@
-#ifndef GPU_TIME_H
-#define GPU_TIME_H
+#ifndef __time__
+#define __time__
 
 struct GpuTime
 {
