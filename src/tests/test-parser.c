@@ -17,5 +17,5 @@ int main(int argc, char** argv)
     readCOO(filepath, num_edges, &rowidx, &colidx, &weights);
     fprintf(stdout, "Parser with struct\n");
     readCOO_struct(filepath, &g1);
-    return 0;
+    return EXIT_SUCCESS;
 }

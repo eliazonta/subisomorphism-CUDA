@@ -1,4 +1,3 @@
-
 #include "match.cuh"
 
 // gpu warmup needs to be done otherwise first malloc will be slower
