@@ -15,6 +15,5 @@ int main() {
     } else {
         fprintf(stdout, "Subgraph isomorphism NOT FOUND.\n");
     }
-
-    return 0;
+    return EXIT_SUCCESS;
 }

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cublas_v2.h> // -lcublas
+#include <cub/cub.cuh> 
 #include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
 #include <cub/cub.cuh> 

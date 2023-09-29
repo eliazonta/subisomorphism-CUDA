@@ -7,6 +7,7 @@
 #include "utils/utils.cuh"
 #include "parsing/parser.h"
 #include "timer/time.cuh"
+#include "match/match.cuh"
 
 // thrust would be interesting asf but getting some allocation problems
 // 
@@ -51,6 +52,7 @@ int main(int argc, char** argv) {
     dim3 block_size(BLK_SIZE, 1, 1);
     dim3 grid_size(1, 1, 1);
     char* file = "../toy/g2.mtx";
+    
 
     #ifdef USE_STRUCT
     struct COOGraph g1, g2;
