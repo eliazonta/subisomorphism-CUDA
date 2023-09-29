@@ -2,8 +2,8 @@
 
 int main() {
     struct CSRGraph target, pattern;
-    // init missing 
-
+    // init missing since are missing CSR utilities
+    
     if (findSubgraphIsomorphism(target, pattern)) 
     {
         fprintf(stdout, "Subgraph isomorphism FOUND!.\n");

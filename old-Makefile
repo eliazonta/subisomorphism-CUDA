@@ -10,7 +10,7 @@ CFLAGS = -c -O2
 #OPT = -O3 -g
 
 # name
-NAME := ZE5
+NAME := GPU-subiso
 BIN_FOLDER := bin
 SRC_FOLDER := src
 BATCH_OUT_FOLDER := out

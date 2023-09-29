@@ -9,7 +9,7 @@
 #include "../graph/graph.h"
 
 #define MAX_V 100
-static int mapping[MAX_V]; // ugly as hell
+static int mapping[MAX_V]; // ugly as hell 
 
 
 bool isSafe(struct CSRGraph target, struct CSRGraph pattern, int target_vertex, int pattern_vertex, int mapping[]);

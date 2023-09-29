@@ -6,9 +6,9 @@
 #include <mutex>
 #include <iostream>
 
-static int BLOCK_SIZE = 1024;
+static int BLK_SIZE = 1024;
 static int dsize = 1;
-static int GRID_SIZE = (dsize+BLOCK_SIZE-1)/BLOCK_SIZE;
+static int GRID_SIZE = (dsize+BLK_SIZE-1)/BLK_SIZE;
 
 ///////////////////////////////////////////////////////////////
 // CUDA error check
