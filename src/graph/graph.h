@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define dtype double
 // graph structures, currently working on COO, willing to use CSR
@@ -28,5 +29,6 @@ struct CSRGraph {
 };
 
 int getVertexNum(int* arr, int s);
+void removeSelfLoops(struct COOGraph* g);
 
 #endif // eof

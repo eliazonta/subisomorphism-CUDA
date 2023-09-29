@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=edu5
+#SBATCH --partition=gsp2306
 #SBATCH --tasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:1
@@ -10,5 +10,6 @@
 #SBATCH --output=out/iso-%x.%j.out
 #SBATCH --error=out/iso-%x.%j.err
 
-module load cuda/12.1
-srun ./bin/name
+ml CUDA/12.1
+mkdir -p bin
+srun ./bin/GPU-subisomorphism

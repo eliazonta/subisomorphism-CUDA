@@ -116,4 +116,3 @@ static  double get_time()
     return duration_type(clock_type::now() - start_time).count();
 }
 
-#endif
