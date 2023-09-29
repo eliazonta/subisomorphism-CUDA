@@ -141,7 +141,58 @@ void freeCOO_struct(struct COOGraph* g)
     }
 }
 
-void freeCSR_struct(struct CSRGraph* g) {
+void edgeListToCSR(FILE* file, struct CSRGraph* g) 
+{
+    int num_rows, num_cols, nnz;
+    int num_vertices, num_edges; // TBD
+    fscanf(file, "%d %d %d", &num_rows, &num_cols, &nnz);
+    g->num_vertices = nnz;
+    // graph->num_edges = num_edges;
+    g->rowptr = (int*)malloc((num_rows + 1) * sizeof(int));
+    g->colidx = (int*)malloc((nnz + 1) * sizeof(int));
+
+    // init
+    memset(g->rowptr, 0, sizeof(int));
+
+    // Read edge data and count neighbors for each vertex
+    for (int i = 0; i < g->num_edges; ++i) 
+    {
+        int source, target;
+        fscanf(file, "%d %d %lf", &source, &target);
+        g->rowptr[source + 1]++;
+        g->rowptr[target + 1]++;
+    }
+
+    // Calculate row_ptr vals (cumulative sum)
+    for (int i = 1; i <= g->num_vertices; ++i) 
+    {
+        g->rowptr[i] += g->rowptr[i - 1];
+    }
+
+    // Read edge data again and fill col_idx
+    rewind(file); // Reset file pointer to the beginning
+    fscanf(file, "%d %d", &num_vertices, &num_edges); // Skip the first line
+    for (int i = 0; i < num_edges; ++i) 
+    {
+        int source, target;
+        fscanf(file, "%d %d", &source, &target);
+        g->colidx[g->rowptr[source]] = target;
+        g->colidx[g->rowptr[target]] = source;
+        g->rowptr[source]++;
+        g->rowptr[target]++;
+    }
+
+    // Reset row_ptr values to their original state
+    for (int i = num_vertices; i > 0; --i) 
+    {
+        g->rowptr[i] = g->rowptr[i - 1];
+    }
+    g->rowptr[0] = 0;
+}
+
+
+void freeCSR_struct(struct CSRGraph* g) 
+{
     if (g != NULL) {
         free(g->rowptr);
         free(g->colidx);
