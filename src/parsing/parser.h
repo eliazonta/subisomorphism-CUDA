@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 #include "../graph/graph.h"
 // #define HEADER_SIZE 128
@@ -15,7 +16,7 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
 void readCOO_struct(const char* filepath, struct COOGraph* g); 
 void freeCOO_struct(struct COOGraph* g);
 
-void edgeListToCSR(FILE* file, struct CSRGraph* g);
+void edgeListToCSR(const char* filepath, struct CSRGraph* g);
 void freeCSR_struct(struct CSRGraph* g);
 
 // // Function to create a new COO graph

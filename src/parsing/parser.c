@@ -12,7 +12,7 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
     FILE* file = fopen(filepath, "r");     
     if (file == NULL) {
         fprintf(stderr, "Error opening file");
-        // return 1;
+        assert(file == NULL);
     }
     // Matrix Market header skip
     // while(fgetc(file) == '%')
@@ -33,15 +33,17 @@ void readCOO(const char* filepath, int num_edges, int* rowidx, int* colidx, dtyp
 
     if (rowidx == NULL || colidx == NULL || weights == NULL) {
         fprintf(stderr, "Memory allocation error");
-        // return 1;
+        assert(rowidx == NULL || colidx == NULL || weights == NULL);
     }
 
     for(size_t i = 0; i < val; ++i){
         fscanf(file, "%d %d %lf", &source, &target, &weight);
         // Store edge information in COO arrays
-        rowidx[i] = source;
-        colidx[i] = target;
-        weights[i] = weight; //  1.0 if no weights 
+        if(weight != 0.0){
+            rowidx[i] = source;
+            colidx[i] = target;
+            weights[i] = weight; //  1.0 if no weights
+        } 
     }
     int num_vertex = getVertexNum(&weights, val);
 
@@ -73,8 +75,8 @@ void readCOO_struct(const char* filepath, struct COOGraph* g)
     dtype weight; // Assuming the weight is a float; change to int if necessary
     FILE* file = fopen(filepath, "r");     
     if (file == NULL) {
-        perror("Error opening file");
-        // return 1;
+        fprintf(stderr, "Error opening file");
+        assert(file == NULL);
     }
     // Matrix Market header skip
     // while(fgetc(file) == '%')
@@ -100,9 +102,11 @@ void readCOO_struct(const char* filepath, struct COOGraph* g)
     for(size_t i = 0; i < g->num_edges; ++i){
         fscanf(file, "%d %d %lf", &source, &target, &weight);
         // Store edge information in COO arrays
-        g->rowidx[i] = source;
-        g->colidx[i] = target;
-        g->weights[i] = weight; // Change to 1.0 if no weights are provided
+        if(weight != 0.0){
+            g->rowidx[i] = source;
+            g->colidx[i] = target;
+            g->weights[i] = weight; // Change to 1.0 if no weights are provided
+        }
     }
     g->num_vertices = getVertexNum(&g->weights, g->num_edges);
     fclose(file);
@@ -141,10 +145,15 @@ void freeCOO_struct(struct COOGraph* g)
     }
 }
 
-void edgeListToCSR(FILE* file, struct CSRGraph* g) 
+void edgeListToCSR(const char* filepath, struct CSRGraph* g) 
 {
     int num_rows, num_cols, nnz;
     int num_vertices, num_edges; // TBD
+    FILE* file = fopen(filepath, "r");     
+    if (file == NULL) {
+        fprintf(stderr, "Error opening file");
+        assert(file==NULL);
+    }
     fscanf(file, "%d %d %d", &num_rows, &num_cols, &nnz);
     g->num_vertices = nnz;
     // graph->num_edges = num_edges;
